@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Pathway.ViewModels"
+             x:Class="Pathway.Views.PlantDetailPage"
+             Title="Plant Details">
+
+    <ContentPage.BindingContext>
+        <viewmodels:PlantDetailViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+            <!-- Header and Image -->
+            <Grid RowDefinitions="Auto" ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="{Binding Plant.Name}" 
+                           FontSize="24" 
+                           FontAttributes="Bold" />
+
+                    <Label Text="{Binding PlantSpecies.ScientificName}" 
+                           FontSize="16" 
+                           FontAttributes="Italic"
+                           TextColor="Gray" />
+                </VerticalStackLayout>
+
+                <!-- Default image placeholder -->
+                <Rectangle Grid.Column="1"
+                       Fill="#E0E0E0"
+                       HeightRequest="100"
+                       WidthRequest="100" />
+            </Grid>
+
+            <!-- Status Card -->
+            <Frame BorderColor="LightGray" 
+                   CornerRadius="10" 
+                   Padding="15"
+                   BackgroundColor="{Binding StatusBackgroundColor}">
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
+                    <Label Grid.Row="0" Grid.Column="0"
+                           Text="Status:" 
+                           FontAttributes="Bold" />
+
+                    <Label Grid.Row="0" Grid.Column="1"
+                           Text="{Binding Plant.Status}" 
+                           FontAttributes="Bold" />
+
+                    <Label Grid.Row="1" Grid.Column="0"
+                           Text="Health:" 
+                           FontAttributes="Bold" />
+
+                    <Label Grid.Row="1" Grid.Column="1"
+                           Text="{Binding Plant.HealthRating}" />
+                </Grid>
+            </Frame>
+
+            <!-- Plant Information Section -->
+            <Label Text="Plant Information" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   Margin="0,10,0,0" />
+
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto">
+                <Label Grid.Row="0" Grid.Column="0"
+                       Text="Family:" 
+                       FontAttributes="Bold" />
+
+                <Label Grid.Row="0" Grid.Column="1"
+                       Text="{Binding PlantSpecies.Family}" />
+
+                <Label Grid.Row="1" Grid.Column="0"
+                       Text="Genus:" 
+                       FontAttributes="Bold" />
+
+                <Label Grid.Row="1" Grid.Column="1"
+                       Text="{Binding PlantSpecies.Genus}" />
+
+                <Label Grid.Row="2" Grid.Column="0"
+                       Text="Planted:" 
+                       FontAttributes="Bold" />
+
+                <Label Grid.Row="2" Grid.Column="1"
+                       Text="{Binding Plant.PlantedDate, StringFormat='{0:MMMM d, yyyy}'}" />
+
+                <Label Grid.Row="3" Grid.Column="0"
+                       Text="Location:" 
+                       FontAttributes="Bold" />
+
+                <Label Grid.Row="3" Grid.Column="1"
+                       Text="{Binding AreaName}" />
+            </Grid>
+
+            <!-- Description Section -->
+            <Label Text="Description" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   Margin="0,10,0,0" />
+
+            <Label Text="{Binding Plant.Description}" />
+
+            <!-- Maintenance History Section -->
+            <Label Text="Maintenance History" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   Margin="0,10,0,0" />
+
+            <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
+                <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                    <Label Text="Last Watered" 
+                           FontAttributes="Bold" 
+                           HorizontalOptions="Center" />
+
+                    <Label Text="{Binding Plant.LastWateredDate, StringFormat='{0:M/d/yy}'}" 
+                           HorizontalOptions="Center" />
+
+                    <Label Text="{Binding DaysSinceWatered, StringFormat='{0} days ago'}" 
+                           HorizontalOptions="Center" 
+                           TextColor="Gray" 
+                           FontSize="12" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="0" Grid.Column="1">
+                    <Label Text="Last Fertilized" 
+                           FontAttributes="Bold" 
+                           HorizontalOptions="Center" />
+
+                    <Label Text="{Binding Plant.LastFertilizedDate, StringFormat='{0:M/d/yy}'}" 
+                           HorizontalOptions="Center" />
+
+                    <Label Text="{Binding DaysSinceFertilized, StringFormat='{0} days ago'}" 
+                           HorizontalOptions="Center" 
+                           TextColor="Gray" 
+                           FontSize="12" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="0" Grid.Column="2">
+                    <Label Text="Last Pruned" 
+                           FontAttributes="Bold" 
+                           HorizontalOptions="Center" />
+
+                    <Label Text="{Binding Plant.LastPrunedDate, StringFormat='{0:M/d/yy}'}" 
+                           HorizontalOptions="Center" />
+
+                    <Label Text="{Binding DaysSincePruned, StringFormat='{0} days ago'}" 
+                           HorizontalOptions="Center" 
+                           TextColor="Gray" 
+                           FontSize="12" />
+                </VerticalStackLayout>
+
+                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                       Text="Last Inspection:" 
+                       FontAttributes="Bold" 
+                       Margin="0,10,0,0" />
+
+                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                       Text="{Binding Plant.LastInspectionDate, StringFormat='{0:MMMM d, yyyy}'}" 
+                       Margin="0,30,0,0" />
+            </Grid>
+
+            <!-- Health Notes Section -->
+            <Label Text="Health Notes" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   Margin="0,10,0,0" />
+
+            <Label Text="{Binding Plant.HealthNotes}" />
+
+            <!-- Care Recommendations Section -->
+            <Label Text="Care Recommendations" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   Margin="0,10,0,0" />
+
+            <Label Text="{Binding CareRecommendations}"
+                   IsVisible="{Binding HasCareRecommendations}" />
+
+            <Label Text="No care recommendations available at this time."
+                   IsVisible="{Binding HasCareRecommendations, Converter={StaticResource InvertedBoolConverter}}"
+                   TextColor="Gray" />
+
+            <!-- Tasks Section -->
+            <Label Text="Associated Tasks" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   Margin="0,10,0,0" />
+
+            <CollectionView ItemsSource="{Binding Tasks}"
+                           EmptyView="No tasks assigned to this plant.">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5" ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="{Binding Title}" 
+                                       FontAttributes="Bold" />
+
+                                <Label Text="{Binding DueDate, StringFormat='Due: {0:MMM d}'}" 
+                                       TextColor="Gray" 
+                                       FontSize="12" />
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="1"
+                                   Text="{Binding Status}"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Action Buttons -->
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Log Watering"
+                        Command="{Binding LogWateringCommand}"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White" />
+
+                <Button Text="Log Fertilizing"
+                        Command="{Binding LogFertilizingCommand}"
+                        BackgroundColor="#2196F3"
+                        TextColor="White" />
+
+                <Button Text="Log Pruning"
+                        Command="{Binding LogPruningCommand}"
+                        BackgroundColor="#FF9800"
+                        TextColor="White" />
+
+                <Button Text="Update Health"
+                        Command="{Binding UpdateHealthCommand}"
+                        BackgroundColor="#9C27B0"
+                        TextColor="White" />
+            </HorizontalStackLayout>
+
+            <!-- Create Task Button -->
+            <Button Text="Create New Task"
+                    Command="{Binding CreateTaskCommand}"
+                    Margin="0,10,0,20"
+                    HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
